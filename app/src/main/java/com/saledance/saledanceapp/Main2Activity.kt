@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.content_main2.*
 class Main2Activity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OnPostClickListener {
 
     override fun OnPostClick(b: Business) {
-        var intent  = Intent(this@Main2Activity, BusinessActivity::class.java)
+        val intent  = Intent(this@Main2Activity, BusinessActivity::class.java)
         intent.putExtra("Business", b)
         startActivity(intent)
     }
@@ -112,12 +112,12 @@ class Main2Activity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
     private fun beginSearch() {
         disposable =
-            api.GetPublishedPosts()
+            api.getPublishedPosts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { result ->  createRecyclerView(result)},
-                    { error ->  Toast.makeText(this,error?.message, Toast.LENGTH_SHORT)}
+                    { error ->  Toast.makeText(this,error?.message, Toast.LENGTH_SHORT).show()}
                 )
     }
 

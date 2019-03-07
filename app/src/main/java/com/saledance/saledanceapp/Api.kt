@@ -11,7 +11,7 @@ interface Api {
 
 
         @GET("api")
-        fun GetPublishedPosts() : Observable<ArrayList<PublishedPost>>
+        fun getPublishedPosts() : Observable<ArrayList<PublishedPost>>
 
         companion object {
                 fun create(): Api {
