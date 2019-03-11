@@ -2,20 +2,22 @@
 
 <RelativeLayout
         android:layout_margin="10dp"
-        android:layout_width="130dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         xmlns:android="http://schemas.android.com/apk/res/android">
     <RelativeLayout
+            android:elevation="10dp"
             android:background="@android:color/black"
             android:id="@+id/imageLayout"
-            android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+            android:layout_width="110dp"
+                    android:layout_height="110dp">
 
         <ImageView
+                android:elevation="10dp"
                 android:scaleType="fitXY"
                 android:id="@+id/saleImage"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"/>
+                android:layout_height="match_parent"/>
 
 
 
@@ -23,34 +25,31 @@
 
     <RelativeLayout
 
-            android:background="#d71c4d"
             android:layout_below="@+id/imageLayout"
-            android:layout_width="match_parent"
-                    android:layout_height="50dp">
+            android:layout_width="110dp"
+                    android:layout_height="wrap_content">
 
 
     <TextView
             android:id="@+id/salePriceTv"
-            android:layout_above="@+id/beforePriceTv"
             android:textSize="16dp"
             android:textStyle="bold"
             android:layout_marginRight="10dp"
             android:gravity="end"
-            android:textColor="@android:color/white"
             android:text="99$"
             android:layout_width="match_parent" android:layout_height="wrap_content"/>
 
     <TextView
+            android:layout_below="@+id/salePriceTv"
             android:id="@+id/beforePriceTv"
             android:textDirection="ltr"
-            android:layout_alignParentBottom="true"
             android:textSize="14dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="5dp"
             android:gravity="end"
-            android:textColor="@android:color/white"
             android:text="במקום 120$"
-            android:layout_width="match_parent" android:layout_height="wrap_content"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 </RelativeLayout>
 
 
