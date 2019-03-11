@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.content_main2.*
 
 class Main2Activity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OnPostClickListener {
 
-    override fun OnPostClick(b: Business) {
+    override fun onPostClick(b: Business) {
         val intent  = Intent(this@Main2Activity, BusinessActivity::class.java)
         intent.putExtra("Business", b)
         startActivity(intent)
@@ -33,6 +33,8 @@ class Main2Activity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     val api by lazy {
         Api.create()
     }
+
+
     var disposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

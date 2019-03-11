@@ -2,5 +2,5 @@ package com.saledance.saledanceapp
 
 interface OnPostClickListener {
 
-    fun OnPostClick(b : Business);
+    fun onPostClick(b : Business)
 }

@@ -15,7 +15,7 @@ class BusinessActivity : AppCompatActivity() {
         setContentView(R.layout.activity_business)
 
 
-        business = (getIntent().getExtras().getSerializable("Business") as? Business)!!
+        business = (intent.extras!!.getSerializable("Business") as? Business)!!
         val decodedString = Base64.decode(business.image, Base64.DEFAULT)
 
         val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
