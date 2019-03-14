@@ -1,5 +1,6 @@
-package com.saledance.saledanceapp
+package com.saledance.saledanceapp.network
 
+import com.saledance.saledanceapp.model.entities.PublishedPost
 import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

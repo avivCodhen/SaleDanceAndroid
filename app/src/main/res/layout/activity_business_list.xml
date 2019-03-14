@@ -11,9 +11,8 @@
         tools:openDrawer="start">
 
     <include
-
             android:id="@+id/appBar"
-            layout="@layout/app_bar_main2"
+            layout="@layout/app_bar_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
@@ -23,7 +22,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
-            app:headerLayout="@layout/nav_header_main2"
+            app:headerLayout="@layout/nav_header_main"
             app:menu="@menu/activity_main2_drawer"/>
 
 

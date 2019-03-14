@@ -1,4 +1,4 @@
-package com.saledance.saledanceapp
+package com.saledance.saledanceapp.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,19 +10,25 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.View.GONE
 import android.widget.Toast
+import com.saledance.saledanceapp.*
+import com.saledance.saledanceapp.model.entities.Business
+import com.saledance.saledanceapp.model.entities.PublishedPost
+import com.saledance.saledanceapp.network.Api
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_main2.*
-import kotlinx.android.synthetic.main.app_bar_main2.*
-import kotlinx.android.synthetic.main.content_main2.*
+import kotlinx.android.synthetic.main.activity_business_list.*
+import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.content_main.*
 
-class Main2Activity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OnPostClickListener {
+class BusinessListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+    OnPostClickListener {
 
     override fun onPostClick(b: Business) {
-        val intent  = Intent(this@Main2Activity, BusinessActivity::class.java)
+        val intent  = Intent(this@BusinessListActivity, BusinessActivity::class.java)
         intent.putExtra("Business", b)
         startActivity(intent)
     }
@@ -30,7 +36,7 @@ class Main2Activity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: RecyclerViewAdapter
 
-    val api by lazy {
+    private val api by lazy {
         Api.create()
     }
 
@@ -39,7 +45,7 @@ class Main2Activity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main2)
+        setContentView(R.layout.activity_business_list)
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
@@ -48,7 +54,9 @@ class Main2Activity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         }
 
         val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this, drawer_layout, toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()

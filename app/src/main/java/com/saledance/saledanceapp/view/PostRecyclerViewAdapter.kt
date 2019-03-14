@@ -1,4 +1,4 @@
-package com.saledance.saledanceapp
+package com.saledance.saledanceapp.view
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -6,23 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.sale_item.view.*
 import android.graphics.BitmapFactory
-import android.graphics.Bitmap
 import android.util.Base64
-import android.widget.ImageView
+import com.saledance.saledanceapp.R
+import com.saledance.saledanceapp.model.entities.Sale
 
 
 class PostRecyclerViewAdapter(private val sales : List<Sale>) : RecyclerView.Adapter<PostRecyclerViewAdapter.SaleHolder>() {
 
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): PostRecyclerViewAdapter.SaleHolder {
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): SaleHolder {
         val inflatedView = LayoutInflater.from(p0.context).inflate(R.layout.sale_item, p0, false)
-        return PostRecyclerViewAdapter.SaleHolder(inflatedView)
+        return SaleHolder(inflatedView)
     }
 
     override fun getItemCount() = sales.size
 
 
-    override fun onBindViewHolder(p0: PostRecyclerViewAdapter.SaleHolder, p1: Int) {
+    override fun onBindViewHolder(p0: SaleHolder, p1: Int) {
         val sale = sales.get(p1)
         val decodedString = Base64.decode(sale.image, Base64.DEFAULT)
 

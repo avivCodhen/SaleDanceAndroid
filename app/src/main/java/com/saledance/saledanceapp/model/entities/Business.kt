@@ -1,4 +1,4 @@
-package com.saledance.saledanceapp
+package com.saledance.saledanceapp.model.entities
 
 import java.io.Serializable
 

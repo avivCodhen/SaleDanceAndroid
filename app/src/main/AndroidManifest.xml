@@ -11,10 +11,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".BusinessActivity">
-        </activity>
         <activity
-                android:name=".Main2Activity"
+                android:name=".view.BusinessListActivity"
                 android:label="@string/title_activity_main2"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -23,8 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity
+                android:name=".view.BusinessActivity"
+                android:label="@string/title_activity_main2"
+                android:parentActivityName=".view.BusinessListActivity" />
     </application>
 
 </manifest>

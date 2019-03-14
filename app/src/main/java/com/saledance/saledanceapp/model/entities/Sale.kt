@@ -1,4 +1,4 @@
-package com.saledance.saledanceapp
+package com.saledance.saledanceapp.model.entities
 
 data class Sale(
     val beforePrice: Double,
