@@ -1,6 +1,8 @@
 package com.saledance.saledanceapp.view
 
+import android.content.Intent
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
@@ -12,7 +14,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 
 class BusinessActivity : AppCompatActivity() {
 
-    private lateinit var business : Business
+    private lateinit var business: Business
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_business_details)
@@ -34,11 +36,35 @@ class BusinessActivity : AppCompatActivity() {
         weekDaysHours.text = business.weekDays
         fridayHours.text = business.friday
         saturdayHours.text = business.saturday
-
-
     }
 
-    fun itemClick(view: View){
-        view.layoutDirection
+    fun itemClick(view: View) {
+
+        when(view.id) {
+            R.id.businessPhone -> {
+                val intent = Intent(Intent.ACTION_DIAL).apply {
+                    data = Uri.parse("tel:${business.businessPhoneContact}")
+                }
+                if (intent.resolveActivity(packageManager) != null) {
+                    startActivity(intent)
+                }
+            }
+            R.id.businessMail -> {
+                val intent = Intent(Intent.ACTION_SENDTO).apply {
+                    data = Uri.parse("mailto:${business.businessEmailContact}")
+                }
+                if (intent.resolveActivity(packageManager) != null) {
+                    startActivity(intent)
+                }
+            }
+            R.id.businessSite -> {
+                val webpage: Uri = Uri.parse(business.site)
+                val intent = Intent(Intent.ACTION_VIEW, webpage)
+
+                if (intent.resolveActivity(packageManager) != null) {
+                    startActivity(intent)
+                }
+            }
+        }
     }
 }

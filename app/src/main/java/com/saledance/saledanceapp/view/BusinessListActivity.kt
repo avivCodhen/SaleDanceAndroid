@@ -1,5 +1,7 @@
 package com.saledance.saledanceapp.view
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -17,6 +19,7 @@ import com.saledance.saledanceapp.*
 import com.saledance.saledanceapp.model.entities.Business
 import com.saledance.saledanceapp.model.entities.PublishedPost
 import com.saledance.saledanceapp.network.Api
+import com.saledance.saledanceapp.viewmodel.BusinessListViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -33,15 +36,9 @@ class BusinessListActivity : AppCompatActivity(), NavigationView.OnNavigationIte
         startActivity(intent)
     }
 
+    private lateinit var model: BusinessListViewModel
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: RecyclerViewAdapter
-
-    private val api by lazy {
-        Api.create()
-    }
-
-
-    var disposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,10 +60,24 @@ class BusinessListActivity : AppCompatActivity(), NavigationView.OnNavigationIte
 
         nav_view.setNavigationItemSelectedListener(this)
 
+        model = ViewModelProviders.of(this).get(BusinessListViewModel::class.java)
 
         linearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayoutManager
-        beginSearch()
+
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+
+        model.getBusinesses().observe(this, Observer<ArrayList<PublishedPost>>{ list ->
+            createRecyclerView(list!!)
+        })
+
+
+        model.getError().observe(this, Observer<Throwable>{ error ->
+            Toast.makeText(this,error?.message, Toast.LENGTH_SHORT).show()
+        })
     }
 
     override fun onBackPressed() {
@@ -118,17 +129,6 @@ class BusinessListActivity : AppCompatActivity(), NavigationView.OnNavigationIte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
-    }
-
-    private fun beginSearch() {
-        disposable =
-            api.getPublishedPosts()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { result ->  createRecyclerView(result)},
-                    { error ->  Toast.makeText(this,error?.message, Toast.LENGTH_SHORT).show()}
-                )
     }
 
     private fun createRecyclerView(list : ArrayList<PublishedPost>){
