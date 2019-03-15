@@ -10,7 +10,7 @@
             android:background="@android:color/black"
             android:id="@+id/imageLayout"
             android:layout_width="130dp"
-                    android:layout_height="110dp">
+                    android:layout_height="100dp">
 
         <ImageView
                 android:elevation="10dp"

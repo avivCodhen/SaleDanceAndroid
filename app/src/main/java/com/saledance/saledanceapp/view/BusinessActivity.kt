@@ -6,6 +6,7 @@ import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
+import android.view.MenuItem
 import android.view.View
 import com.saledance.saledanceapp.model.entities.Business
 import com.saledance.saledanceapp.R
@@ -36,6 +37,20 @@ class BusinessActivity : AppCompatActivity() {
         weekDaysHours.text = business.weekDays
         fridayHours.text = business.friday
         saturdayHours.text = business.saturday
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when(item!!.itemId){
+            android.R.id.home ->{
+                onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     fun itemClick(view: View) {

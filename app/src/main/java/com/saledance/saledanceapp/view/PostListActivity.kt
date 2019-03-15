@@ -12,26 +12,21 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.view.View.GONE
 import android.widget.Toast
 import com.saledance.saledanceapp.*
 import com.saledance.saledanceapp.model.entities.Business
 import com.saledance.saledanceapp.model.entities.PublishedPost
-import com.saledance.saledanceapp.network.Api
 import com.saledance.saledanceapp.viewmodel.BusinessListViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_business_list.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
-class BusinessListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     OnPostClickListener {
 
     override fun onPostClick(b: Business) {
-        val intent  = Intent(this@BusinessListActivity, BusinessActivity::class.java)
+        val intent  = Intent(this@PostListActivity, BusinessActivity::class.java)
         intent.putExtra("Business", b)
         startActivity(intent)
     }
@@ -66,6 +61,10 @@ class BusinessListActivity : AppCompatActivity(), NavigationView.OnNavigationIte
         recyclerView.layoutManager = linearLayoutManager
 
         observeViewModel()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
     }
 
     private fun observeViewModel() {
