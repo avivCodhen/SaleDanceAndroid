@@ -18,7 +18,7 @@ import com.saledance.saledanceapp.*
 import com.saledance.saledanceapp.model.entities.Business
 import com.saledance.saledanceapp.model.entities.PublishedPost
 import com.saledance.saledanceapp.viewmodel.BusinessListViewModel
-import kotlinx.android.synthetic.main.activity_business_list.*
+import kotlinx.android.synthetic.main.activity_post_list.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -37,7 +37,7 @@ class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_business_list)
+        setContentView(R.layout.activity_post_list)
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
