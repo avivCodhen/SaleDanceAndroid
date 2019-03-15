@@ -34,6 +34,7 @@ class RecyclerViewAdapter(
         p0.itemView.postTitle.text = publishedPosts[p1].post.name
         p0.itemView.postBodyTv.text = publishedPosts[p1].post.body
         p0.itemView.setOnClickListener{onPostClickListener.onPostClick(publishedPost.business) }
+        p0.itemView.streetTv.text = publishedPosts[p1].business.address
     }
 
 
