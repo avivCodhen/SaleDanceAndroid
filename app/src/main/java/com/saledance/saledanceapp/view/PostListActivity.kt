@@ -9,11 +9,16 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View.GONE
+import android.view.View.SCROLL_AXIS_HORIZONTAL
 import android.widget.Toast
+import com.ethanhua.skeleton.Skeleton
+import com.ethanhua.skeleton.SkeletonScreen
 import com.saledance.saledanceapp.*
 import com.saledance.saledanceapp.model.entities.Business
 import com.saledance.saledanceapp.model.entities.PublishedPost
@@ -34,6 +39,7 @@ class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     private lateinit var model: BusinessListViewModel
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: RecyclerViewAdapter
+    private lateinit var skeletonScreen : SkeletonScreen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +50,7 @@ class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+
 
         /*val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar,
@@ -60,7 +67,16 @@ class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         linearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayoutManager
 
+        adapter = RecyclerViewAdapter(arrayListOf<PublishedPost>(), this)
+
+        skeletonScreen = Skeleton.bind(recyclerView)
+            .adapter(adapter)
+            .load(R.layout.skeleton_post_item)
+            .show()
+
         observeViewModel()
+
+
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -131,8 +147,11 @@ class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     }
 
     private fun createRecyclerView(list : ArrayList<PublishedPost>){
-        adapter = RecyclerViewAdapter(list, this)
+        Log.d("aviv", "finished")
+
+        adapter.publishedPosts = list
         recyclerView.adapter = adapter
-        mainActivityProgressBar.visibility = GONE
+        val deco = DividerItemDecoration(this@PostListActivity, SCROLL_AXIS_HORIZONTAL)
+        recyclerView.addItemDecoration(deco)
     }
 }

@@ -9,6 +9,8 @@ import android.graphics.BitmapFactory
 import android.util.Base64
 import com.saledance.saledanceapp.R
 import com.saledance.saledanceapp.model.entities.Sale
+import kotlinx.android.synthetic.main.post_item.view.*
+import java.time.LocalDate
 
 
 class PostRecyclerViewAdapter(private val sales : List<Sale>) : RecyclerView.Adapter<PostRecyclerViewAdapter.SaleHolder>() {
@@ -30,6 +32,7 @@ class PostRecyclerViewAdapter(private val sales : List<Sale>) : RecyclerView.Ada
         p0.itemView.saleImage.setImageBitmap(decodedByte)
         p0.itemView.salePriceTv.text = "₪"+sale.salePrice.toInt().toString()
         p0.itemView.beforePriceTv.text = "₪"+sale.beforePrice.toInt().toString() + " במקום"
+
     }
 
     class SaleHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
