@@ -76,7 +76,6 @@ class BusinessListActivity : AppCompatActivity(), NavigationView.OnNavigationIte
 
 
         model.getError().observe(this, Observer<Throwable>{ error ->
-            updateProgressBarVisibility()
             Toast.makeText(this,error?.message, Toast.LENGTH_SHORT).show()
         })
     }
@@ -135,10 +134,6 @@ class BusinessListActivity : AppCompatActivity(), NavigationView.OnNavigationIte
     private fun createRecyclerView(list : ArrayList<PublishedPost>){
         adapter = RecyclerViewAdapter(list, this)
         recyclerView.adapter = adapter
-        updateProgressBarVisibility()
+        mainActivityProgressBar.visibility = GONE
     }
-
-    private fun updateProgressBarVisibility() {
-        mainActivityProgressBar.visibility = GONE    }
-
 }

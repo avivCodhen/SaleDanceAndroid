@@ -3,6 +3,7 @@ package com.saledance.saledanceapp.viewmodel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.util.Log
 import com.saledance.saledanceapp.model.entities.PublishedPost
 import com.saledance.saledanceapp.network.Api
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -30,6 +31,7 @@ class BusinessListViewModel: ViewModel() {
     }
 
     private fun loadBusinesses(){
+        Log.d("aviv", "started")
         disposable =
             api.getPublishedPosts()
                 .subscribeOn(Schedulers.io())
