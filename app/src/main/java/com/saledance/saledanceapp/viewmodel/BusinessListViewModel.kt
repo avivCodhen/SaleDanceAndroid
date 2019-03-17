@@ -29,7 +29,6 @@ class BusinessListViewModel: ViewModel() {
         Api.create()
     }
 
-
     private fun loadBusinesses(){
         disposable =
             api.getPublishedPosts()
