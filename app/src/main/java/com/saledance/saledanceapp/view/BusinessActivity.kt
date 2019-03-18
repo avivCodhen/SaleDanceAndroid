@@ -39,10 +39,6 @@ class BusinessActivity : AppCompatActivity() {
         saturdayHours.text = business.saturday
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
-
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when(item!!.itemId){
             android.R.id.home ->{

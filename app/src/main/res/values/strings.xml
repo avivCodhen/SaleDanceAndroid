@@ -11,4 +11,6 @@
     <string name="week_days">א-ה</string>
     <string name="week_friday">ו</string>
     <string name="week_saturday">ש</string>
+    <string name="discount_price">₪ %1$s</string>
+    <string name="original_price">₪ %1$s במקום </string>
 </resources>
