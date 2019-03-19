@@ -13,4 +13,5 @@
     <string name="week_saturday">ש</string>
     <string name="discount_price">₪ %1$s</string>
     <string name="original_price">₪ %1$s במקום </string>
+    <string name="no_results">אין פוסטים חדשים</string>
 </resources>

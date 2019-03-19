@@ -3,6 +3,7 @@ package com.saledance.saledanceapp.view
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -13,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Toast
 import com.saledance.saledanceapp.*
 import com.saledance.saledanceapp.model.entities.Business
@@ -66,12 +68,16 @@ class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     private fun observeViewModel() {
 
         model.getBusinesses().observe(this, Observer<ArrayList<PublishedPost>>{ list ->
-            createRecyclerView(list!!)
+            if (list!!.size > 0){
+                createRecyclerView(list!!)
+            }else{
+                tvNoResults.visibility = VISIBLE
+            }
         })
 
 
         model.getError().observe(this, Observer<Throwable>{ error ->
-            Toast.makeText(this,error?.message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, error?.message, Toast.LENGTH_SHORT).show()
         })
     }
 
