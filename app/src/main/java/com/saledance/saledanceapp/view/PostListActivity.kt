@@ -3,22 +3,19 @@ package com.saledance.saledanceapp.view
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View.GONE
-import android.view.View.SCROLL_AXIS_HORIZONTAL
+import android.view.View.VISIBLE
 import android.widget.Toast
-import com.ethanhua.skeleton.Skeleton
-import com.ethanhua.skeleton.SkeletonScreen
 import com.saledance.saledanceapp.*
 import com.saledance.saledanceapp.model.entities.Business
 import com.saledance.saledanceapp.model.entities.PublishedPost
@@ -39,7 +36,6 @@ class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     private lateinit var model: BusinessListViewModel
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: RecyclerViewAdapter
-    private lateinit var skeletonScreen : SkeletonScreen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,14 +47,13 @@ class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 .setAction("Action", null).show()
         }
 
-
-        /*val toggle = ActionBarDrawerToggle(
+        val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar,
             R.string.navigation_drawer_open,
             R.string.navigation_drawer_close
         )
         drawer_layout.addDrawerListener(toggle)
-        toggle.syncState()*/
+        toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
 
@@ -67,31 +62,22 @@ class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         linearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayoutManager
 
-        adapter = RecyclerViewAdapter(arrayListOf<PublishedPost>(), this)
-
-        skeletonScreen = Skeleton.bind(recyclerView)
-            .adapter(adapter)
-            .load(R.layout.skeleton_post_item)
-            .show()
-
         observeViewModel()
-
-
-    }
-
-    override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
     }
 
     private fun observeViewModel() {
 
         model.getBusinesses().observe(this, Observer<ArrayList<PublishedPost>>{ list ->
-            createRecyclerView(list!!)
+            if (list!!.size > 0){
+                createRecyclerView(list!!)
+            }else{
+                tvNoResults.visibility = VISIBLE
+            }
         })
 
 
         model.getError().observe(this, Observer<Throwable>{ error ->
-            Toast.makeText(this,error?.message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, error?.message, Toast.LENGTH_SHORT).show()
         })
     }
 
@@ -147,11 +133,8 @@ class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     }
 
     private fun createRecyclerView(list : ArrayList<PublishedPost>){
-        Log.d("aviv", "finished")
-
-        adapter.publishedPosts = list
+        adapter = RecyclerViewAdapter(list, this)
         recyclerView.adapter = adapter
-        val deco = DividerItemDecoration(this@PostListActivity, SCROLL_AXIS_HORIZONTAL)
-        recyclerView.addItemDecoration(deco)
+        mainActivityProgressBar.visibility = GONE
     }
 }
