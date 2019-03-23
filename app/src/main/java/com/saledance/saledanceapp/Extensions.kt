@@ -23,7 +23,7 @@ object Extensions {
 
     fun toSimpleString(publishedAt: String): String {
         val inputFormatter = SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSZ", Locale.ENGLISH)
-        val outputFormatter = SimpleDateFormat ("EEE, d MMM yyyy HH:mm", Locale.getDefault())
+        val outputFormatter = SimpleDateFormat ("EEE d MMM", Locale.getDefault())
         val date = inputFormatter.parse(publishedAt)
         return outputFormatter.format(date)
     }

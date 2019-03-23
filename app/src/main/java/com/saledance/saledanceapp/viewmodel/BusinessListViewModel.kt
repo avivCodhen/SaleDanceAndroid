@@ -3,6 +3,7 @@ package com.saledance.saledanceapp.viewmodel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.util.Log
 import com.saledance.saledanceapp.model.entities.PublishedPost
 import com.saledance.saledanceapp.network.Api
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,14 +30,19 @@ class BusinessListViewModel: ViewModel() {
         Api.create()
     }
 
-    private fun loadBusinesses(){
+     fun loadBusinesses(){
         disposable =
             api.getPublishedPosts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { result ->  business.value = result},
-                    { error -> errorMassage.value = error}
+                    { error ->
+                        run {
+                            Log.d("aviv", error.message)
+                            loadBusinesses()
+                        }
+                    }
                 )
     }
 

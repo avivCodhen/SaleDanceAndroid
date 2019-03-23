@@ -1,82 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+        android:background="@android:color/white"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        android:layout_height="wrap_content">
 
-
-            android:id="@+id/postVardView"
-            android:layout_margin="15dp"
+    <RelativeLayout
+            android:padding="15dp"
             android:layout_width="match_parent"
-            android:layout_height="300dp">
+            android:layout_height="match_parent">
         <RelativeLayout
-                android:padding="15dp"
+                android:id="@+id/postTitleLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            <RelativeLayout
-                    android:layout_marginBottom="5dp"
-                    android:id="@+id/postTitleLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                <TextView
-                        android:id="@+id/timeTv"
-                        android:text="16 days ago"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                <TextView
-                        android:id="@+id/streetTv"
-                        android:text="ויצמן 24"
-                        android:layout_alignParentRight="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-            </RelativeLayout>
-
-            <TextView
-                    android:layout_below="@+id/postTitleLayout"
-                    android:id="@+id/businessTitle"
-                    android:layout_gravity="end"
-                    android:text="הפוסט הכי גדול ביקום"
-                    android:textStyle="bold"
-                    android:textSize="18dp"
-                    android:textColor="@android:color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
 
 
             <TextView
-
-                    android:id="@+id/postBodyTv"
-                    android:maxLines="3"
-                    android:ellipsize="start"
-                    android:textSize="16dp"
-                    android:textDirection="rtl"
-                    android:layout_marginTop="10dp"
-                    android:text="כל הדברים הכי חכמים הכי טובים נמצאים אצלינו, אין מבצעים יותר זולים מזה. חבל על הזמן שלך! רק תבוא ותתרשם מהאיכות הבלתי נגמרת של זה!!!! "
-                    android:layout_below="@+id/businessTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-
-
-            <android.support.v7.widget.RecyclerView
-                    android:elevation="10dp"
-                    android:id="@+id/postRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    android:layout_below="@+id/postBodyTv"
-            >
-
-            </android.support.v7.widget.RecyclerView>
+                    android:id="@+id/timeTv"
+                    android:text="16 days ago"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
         </RelativeLayout>
 
+        <RelativeLayout
+                android:layout_below="@+id/postTitleLayout"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/avatarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <Button
+                    android:id="@+id/businessBtn"
+                    android:layout_centerVertical="true"
+                    android:background="@color/colorAccent"
+                    android:text="צפה בעסק"
+                    android:textColor="@android:color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+            />
+            <de.hdodenhof.circleimageview.CircleImageView
+
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    app:civ_border_width="2dp"
+                    app:civ_border_overlay="true"
+
+                    app:civ_border_color="@color/colorAccent"
+                    android:layout_width="40dp"
+                    android:id="@+id/businessAvatar"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="40dp"/>
+            <TextView
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:layout_marginRight="10dp"
+                    android:text="אופטיקנה הלפרין"
+                    android:layout_toLeftOf="@+id/businessAvatar"
+                    android:id="@+id/businessTitleTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+            <TextView
+                    android:textSize="13dp"
+                    android:layout_toLeftOf="@+id/businessAvatar"
+                    android:layout_marginRight="10dp"
+                    android:layout_below="@+id/businessTitleTV"
+                    android:id="@+id/streetTv"
+                    android:text="ויצמן 24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+        <View
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/avatarLayout"
+                android:background="@color/colorAccent"
+                android:id="@+id/divider"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_width="60dp"
+                android:layout_height="1dp">
+
+        </View>
+        <TextView
+                android:visibility="gone"
+                android:layout_below="@+id/divider"
+                android:id="@+id/businessTitle"
+                android:layout_gravity="end"
+                android:text="הפוסט הכי גדול ביקום"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        <TextView
+
+                android:id="@+id/postBodyTv"
+                android:maxLines="3"
+                android:ellipsize="start"
+                android:textSize="16dp"
+                android:textDirection="rtl"
+                android:layout_marginTop="10dp"
+                android:text="כל הדברים הכי חכמים הכי טובים נמצאים אצלינו, אין מבצעים יותר זולים מזה. חבל על הזמן שלך! רק תבוא ותתרשם מהאיכות הבלתי נגמרת של זה!!!! "
+                android:layout_below="@+id/businessTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        <android.support.v7.widget.RecyclerView
+                android:elevation="10dp"
+                android:id="@+id/postRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/postBodyTv"
+        >
+
+        </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

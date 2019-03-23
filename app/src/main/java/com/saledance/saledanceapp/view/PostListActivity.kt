@@ -10,11 +10,11 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.widget.Toast
 import com.saledance.saledanceapp.*
 import com.saledance.saledanceapp.model.entities.Business
@@ -47,21 +47,22 @@ class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 .setAction("Action", null).show()
         }
 
-        val toggle = ActionBarDrawerToggle(
+      /*  val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar,
             R.string.navigation_drawer_open,
             R.string.navigation_drawer_close
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-
+*/
         nav_view.setNavigationItemSelectedListener(this)
 
         model = ViewModelProviders.of(this).get(BusinessListViewModel::class.java)
 
         linearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayoutManager
-
+        val deco = DividerItemDecoration(this@PostListActivity, SCROLL_AXIS_HORIZONTAL)
+        recyclerView.addItemDecoration(deco)
         observeViewModel()
     }
 
@@ -100,7 +101,12 @@ class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
-            R.id.action_settings -> return true
+            R.id.refresh -> {
+                recyclerView.adapter = null
+                postActivityLoader.visibility = VISIBLE
+               model.loadBusinesses()
+                return true
+            }
             else -> return super.onOptionsItemSelected(item)
         }
     }
@@ -135,6 +141,7 @@ class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     private fun createRecyclerView(list : ArrayList<PublishedPost>){
         adapter = RecyclerViewAdapter(list, this)
         recyclerView.adapter = adapter
-        mainActivityProgressBar.visibility = GONE
+        postActivityLoader.visibility = INVISIBLE
+
     }
 }

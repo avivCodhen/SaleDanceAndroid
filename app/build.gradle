@@ -47,6 +47,10 @@ dependencies {
     //skeleton loading
     implementation 'com.ethanhua:skeleton:1.1.2'
     implementation 'io.supercharge:shimmerlayout:2.1.0'
+    implementation 'com.agrawalsuneet.androidlibs:loaderspack:1.2.3'
+
+    //circular image
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
