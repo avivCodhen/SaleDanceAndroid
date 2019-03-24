@@ -1,5 +1,6 @@
 package com.saledance.saledanceapp.view
 
+import android.app.ActivityOptions
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -23,14 +24,17 @@ import com.saledance.saledanceapp.viewmodel.BusinessListViewModel
 import kotlinx.android.synthetic.main.activity_post_list.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.post_item.*
 
 class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     OnPostClickListener {
 
     override fun onPostClick(b: Business) {
         val intent  = Intent(this@PostListActivity, BusinessActivity::class.java)
+        val options = ActivityOptions
+            .makeSceneTransitionAnimation(this, businessAvatar, "businessAvatar")
         intent.putExtra("Business", b)
-        startActivity(intent)
+        startActivity(intent, options.toBundle())
     }
 
     private lateinit var model: BusinessListViewModel

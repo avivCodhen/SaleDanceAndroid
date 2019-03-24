@@ -28,6 +28,7 @@
                     android:id="@+id/businessImage"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:transitionName="businessAvatar"
                     app:layout_collapseMode="parallax"
                     app:layout_collapseParallaxMultiplier="0.7"/>
 
