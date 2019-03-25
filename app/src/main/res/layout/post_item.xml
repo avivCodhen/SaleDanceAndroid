@@ -40,22 +40,22 @@
                     android:layout_height="25dp"
             />
             <de.hdodenhof.circleimageview.CircleImageView
-
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     app:civ_border_width="2dp"
                     app:civ_border_overlay="true"
-
+                    android:transitionName="businessAvatar"
                     app:civ_border_color="@color/colorAccent"
                     android:layout_width="40dp"
+
                     android:id="@+id/businessAvatar"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_height="40dp"/>
             <TextView
                     android:textColor="@android:color/black"
                     android:textStyle="bold"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:text="אופטיקנה הלפרין"
-                    android:layout_toLeftOf="@+id/businessAvatar"
+                    android:layout_toStartOf="@+id/businessAvatar"
                     android:id="@+id/businessTitleTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -63,8 +63,8 @@
 
             <TextView
                     android:textSize="13dp"
-                    android:layout_toLeftOf="@+id/businessAvatar"
-                    android:layout_marginRight="10dp"
+                    android:layout_toStartOf="@+id/businessAvatar"
+                    android:layout_marginEnd="10dp"
                     android:layout_below="@+id/businessTitleTV"
                     android:id="@+id/streetTv"
                     android:text="ויצמן 24"
