@@ -1,6 +1,7 @@
 package com.saledance.saledanceapp.view
 
 import android.graphics.BitmapFactory
+import android.support.v4.view.ViewCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Base64
@@ -17,42 +18,49 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class RecyclerViewAdapter(
-    public var publishedPosts: ArrayList<PublishedPost>,
+    private var publishedPosts: ArrayList<PublishedPost>,
     private val onPostClickListener: OnPostClickListener
 ) :
     RecyclerView.Adapter<RecyclerViewAdapter.PublishedPostViewHolder>() {
 
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): PublishedPostViewHolder {
-        val inflatedView = LayoutInflater.from(p0.context).inflate(R.layout.post_item, p0, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PublishedPostViewHolder {
+        val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.post_item, parent, false)
         return PublishedPostViewHolder(
-            inflatedView,
-            onPostClickListener
+            inflatedView
         )
     }
 
     override fun getItemCount() = publishedPosts.size
 
-    override fun onBindViewHolder(p0: PublishedPostViewHolder, p1: Int) {
-        val publishedPost = publishedPosts[p1]
-        p0.itemView.postRecyclerView.layoutManager = LinearLayoutManager(p0.itemView.context,LinearLayoutManager.HORIZONTAL, true)
-        p0.itemView.postRecyclerView.adapter =
-            PostRecyclerViewAdapter(publishedPost.sales)
-        p0.itemView.postBodyTv.text = publishedPosts[p1].post.body
-        p0.itemView.businessBtn.setOnClickListener{onPostClickListener.onPostClick(publishedPost.business) }
-        p0.itemView.streetTv.text = publishedPosts[p1].business.address
-        p0.itemView.timeTv.text = toSimpleString(publishedPost.publishTime)
-        val decodedString = Base64.decode(publishedPost.business.image, Base64.DEFAULT)
-        p0.itemView.businessTitleTV.text = publishedPost.business.name
-        val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-        p0.itemView.businessAvatar.setImageBitmap(decodedByte)
+    override fun onBindViewHolder(holder: PublishedPostViewHolder, position: Int) {
+
+        holder.bindPost(publishedPosts[position], onPostClickListener, position)
     }
 
 
     class PublishedPostViewHolder(
-        itemView: View,
-        onPostClickListener: OnPostClickListener
+        itemView: View
     ) : RecyclerView.ViewHolder(itemView) {
+
+        fun bindPost(publishedPost: PublishedPost, clickListener: OnPostClickListener, position: Int) {
+
+            itemView.postRecyclerView.layoutManager =
+                LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, true)
+            itemView.postRecyclerView.adapter =
+                PostRecyclerViewAdapter(publishedPost.sales)
+            itemView.postBodyTv.text = publishedPost.post.body
+            val transitionName = "test$position"
+            ViewCompat.setTransitionName(itemView.businessAvatar, transitionName)
+//            itemView.businessAvatar.transitionName = transitionName
+            itemView.businessBtn.setOnClickListener { clickListener.onPostClick(publishedPost.business, itemView.businessAvatar) }
+            itemView.streetTv.text = publishedPost.business.address
+            itemView.timeTv.text = toSimpleString(publishedPost.publishTime)
+            val decodedString = Base64.decode(publishedPost.business.image, Base64.DEFAULT)
+            itemView.businessTitleTV.text = publishedPost.business.name
+            val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            itemView.businessAvatar.setImageBitmap(decodedByte)
+        }
 
     }
 
