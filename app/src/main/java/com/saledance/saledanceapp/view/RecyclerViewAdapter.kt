@@ -52,7 +52,6 @@ class RecyclerViewAdapter(
             itemView.postBodyTv.text = publishedPost.post.body
             val transitionName = "test$position"
             ViewCompat.setTransitionName(itemView.businessAvatar, transitionName)
-//            itemView.businessAvatar.transitionName = transitionName
             itemView.businessBtn.setOnClickListener { clickListener.onPostClick(publishedPost.business, itemView.businessAvatar) }
             itemView.streetTv.text = publishedPost.business.address
             itemView.timeTv.text = toSimpleString(publishedPost.publishTime)

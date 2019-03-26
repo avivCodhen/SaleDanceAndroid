@@ -29,7 +29,6 @@ class BusinessActivity : AppCompatActivity() {
 
         val transitionName = intent.extras!!.getString(EXTRA_POST_TRANSITION_NAME)
         businessImage.transitionName = transitionName
-//        supportStartPostponedEnterTransition()
 
         supportActionBar?.title = business.name
         val decodedString = Base64.decode(business.image, Base64.DEFAULT)

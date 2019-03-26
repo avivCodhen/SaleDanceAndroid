@@ -27,7 +27,6 @@ import com.saledance.saledanceapp.viewmodel.BusinessListViewModel
 import kotlinx.android.synthetic.main.activity_post_list.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.android.synthetic.main.post_item.*
 
 class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     OnPostClickListener {
