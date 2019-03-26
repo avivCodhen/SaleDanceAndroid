@@ -9,20 +9,26 @@ import android.util.Base64
 import android.view.MenuItem
 import android.view.View
 import com.saledance.saledanceapp.model.entities.Business
-import com.saledance.saledanceapp.R
 import kotlinx.android.synthetic.main.activity_business_details.*
-import kotlinx.android.synthetic.main.app_bar_main.*
+import com.saledance.saledanceapp.EXTRA_POST_TRANSITION_NAME
+import android.support.v4.view.ViewCompat.setTransitionName
+
+
+
 
 class BusinessActivity : AppCompatActivity() {
 
     private lateinit var business: Business
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_business_details)
+        setContentView(com.saledance.saledanceapp.R.layout.activity_business_details)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         business = (intent.extras!!.getSerializable("Business") as? Business)!!
+
+        val transitionName = intent.extras!!.getString(EXTRA_POST_TRANSITION_NAME)
+        businessImage.transitionName = transitionName
 
         supportActionBar?.title = business.name
         val decodedString = Base64.decode(business.image, Base64.DEFAULT)
@@ -52,7 +58,7 @@ class BusinessActivity : AppCompatActivity() {
     fun itemClick(view: View) {
 
         when(view.id) {
-            R.id.businessPhone -> {
+            com.saledance.saledanceapp.R.id.businessPhone -> {
                 val intent = Intent(Intent.ACTION_DIAL).apply {
                     data = Uri.parse("tel:${business.businessPhoneContact}")
                 }
@@ -60,7 +66,7 @@ class BusinessActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-            R.id.businessMail -> {
+            com.saledance.saledanceapp.R.id.businessMail -> {
                 val intent = Intent(Intent.ACTION_SENDTO).apply {
                     data = Uri.parse("mailto:${business.businessEmailContact}")
                 }
@@ -68,7 +74,7 @@ class BusinessActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-            R.id.businessSite -> {
+            com.saledance.saledanceapp.R.id.businessSite -> {
                 val webpage: Uri = Uri.parse(business.site)
                 val intent = Intent(Intent.ACTION_VIEW, webpage)
 
