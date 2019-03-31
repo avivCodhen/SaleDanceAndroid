@@ -1,6 +1,9 @@
 package com.saledance.saledanceapp.model.entities
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
+
 
 data class Business (
     val about: String,

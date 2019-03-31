@@ -12,6 +12,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".view.SaleActivity">
+        </activity>
         <activity
                 android:name=".view.PostListActivity"
                 android:label="@string/title_activity_main2"
@@ -25,7 +27,7 @@
         <activity
                 android:name=".view.BusinessActivity"
                 android:label="@string/title_activity_main2"
-                android:parentActivityName=".view.PostListActivity" />
+                android:parentActivityName=".view.PostListActivity"/>
     </application>
 
 </manifest>

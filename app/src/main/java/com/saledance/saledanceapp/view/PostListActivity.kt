@@ -1,17 +1,14 @@
 package com.saledance.saledanceapp.view
 
-import android.app.ActivityOptions
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewCompat
-import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
@@ -23,6 +20,7 @@ import android.widget.Toast
 import com.saledance.saledanceapp.*
 import com.saledance.saledanceapp.model.entities.Business
 import com.saledance.saledanceapp.model.entities.PublishedPost
+import com.saledance.saledanceapp.view.interfaces.OnPostClickListener
 import com.saledance.saledanceapp.viewmodel.BusinessListViewModel
 import kotlinx.android.synthetic.main.activity_post_list.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -35,14 +33,14 @@ class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val intent  = Intent(this@PostListActivity, BusinessActivity::class.java)
         val options = ActivityOptionsCompat
             .makeSceneTransitionAnimation(this, imageView, ViewCompat.getTransitionName(imageView)!!)
-        intent.putExtra("Business", b)
-        intent.putExtra(EXTRA_POST_TRANSITION_NAME, ViewCompat.getTransitionName(imageView));
+        intent.putExtra(BUSINESS, b)
+        intent.putExtra(EXTRA_POST_TRANSITION_NAME, ViewCompat.getTransitionName(imageView))
         startActivity(intent, options.toBundle())
     }
 
     private lateinit var model: BusinessListViewModel
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var adapter: RecyclerViewAdapter
+    private lateinit var adapter: PostRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -146,7 +144,7 @@ class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     }
 
     private fun createRecyclerView(list : ArrayList<PublishedPost>){
-        adapter = RecyclerViewAdapter(list, this)
+        adapter = PostRecyclerViewAdapter(list, this)
         recyclerView.adapter = adapter
         postActivityLoader.visibility = INVISIBLE
 

@@ -12,8 +12,7 @@ import com.saledance.saledanceapp.model.entities.Business
 import kotlinx.android.synthetic.main.activity_business_details.*
 import com.saledance.saledanceapp.EXTRA_POST_TRANSITION_NAME
 import android.support.v4.view.ViewCompat.setTransitionName
-
-
+import com.saledance.saledanceapp.BUSINESS
 
 
 class BusinessActivity : AppCompatActivity() {
@@ -25,7 +24,7 @@ class BusinessActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        business = (intent.extras!!.getSerializable("Business") as? Business)!!
+        business = (intent.extras!!.getSerializable(BUSINESS) as? Business)!!
 
         val transitionName = intent.extras!!.getString(EXTRA_POST_TRANSITION_NAME)
         businessImage.transitionName = transitionName
