@@ -4,6 +4,7 @@ import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
+import android.view.MenuItem
 import com.saledance.saledanceapp.EXTRA_POST_TRANSITION_NAME
 import com.saledance.saledanceapp.R
 import com.saledance.saledanceapp.SALE
@@ -29,5 +30,15 @@ class SaleActivity : AppCompatActivity() {
 
         val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
         saleImage.setImageBitmap(decodedByte)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when(item!!.itemId){
+            android.R.id.home ->{
+                onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
