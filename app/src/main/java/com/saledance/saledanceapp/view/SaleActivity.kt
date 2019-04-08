@@ -1,14 +1,11 @@
 package com.saledance.saledanceapp.view
 
-import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Base64
 import android.view.MenuItem
 import com.saledance.saledanceapp.*
 import com.saledance.saledanceapp.model.entities.Sale
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_business_details.*
 import kotlinx.android.synthetic.main.activity_sale.*
 
 class SaleActivity : AppCompatActivity() {
@@ -29,7 +26,7 @@ class SaleActivity : AppCompatActivity() {
 
         Picasso
             .get()
-            .load("$BASE_URL$IMAGE_URL${sale.id}")
+            .load("$BASE_URL$IMAGE_URL${sale.imageId}")
             .into(saleImage)
     }
 

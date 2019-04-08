@@ -3,13 +3,10 @@ package com.saledance.saledanceapp.view
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.content.ContextCompat.startActivity
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,7 +61,7 @@ class PostRecyclerViewAdapter(
 
             Picasso
                 .get()
-                .load("$BASE_URL$IMAGE_URL${publishedPost.business.id}")
+                .load("$BASE_URL$IMAGE_URL${publishedPost.business.imageId}")
                 .into(itemView.businessAvatar)
         }
 

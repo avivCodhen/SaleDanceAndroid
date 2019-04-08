@@ -44,7 +44,7 @@ class SalesRecyclerViewAdapter(private val sales : List<Sale>, private val onSal
             itemView.saleImage.setOnClickListener{clickListener.onSaleClick(sale, itemView.saleImage, itemView.context)}
             Picasso
                 .get()
-                .load("$BASE_URL$IMAGE_URL${sale.id}")
+                .load("$BASE_URL$IMAGE_URL${sale.imageId}")
                 .into(itemView.saleImage)
 
             itemView.salePriceTv.text = String.format(res.getString

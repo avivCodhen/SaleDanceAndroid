@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Sale(
     val beforePrice: Double?,
-    val id: Int?,
+    val imageId: Int?,
     val name: String?,
     val salePrice: Double?,
     val description: String?

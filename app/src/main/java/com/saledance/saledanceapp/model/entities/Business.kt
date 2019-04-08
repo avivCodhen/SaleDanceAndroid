@@ -10,7 +10,7 @@ data class Business (
     val businessEmailContact: String?,
     val businessPhoneContact: String?,
     val friday: String?,
-    val id: Int?,
+    val imageId: Int?,
     val name: String?,
     val saturday: String?,
     val site: String?,
