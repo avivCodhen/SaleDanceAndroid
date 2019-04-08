@@ -5,10 +5,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
 import android.view.MenuItem
-import com.saledance.saledanceapp.EXTRA_POST_TRANSITION_NAME
-import com.saledance.saledanceapp.R
-import com.saledance.saledanceapp.SALE
+import com.saledance.saledanceapp.*
 import com.saledance.saledanceapp.model.entities.Sale
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_business_details.*
 import kotlinx.android.synthetic.main.activity_sale.*
 
 class SaleActivity : AppCompatActivity() {
@@ -20,16 +20,17 @@ class SaleActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        sale = (intent.extras!!.getSerializable(SALE) as? Sale)!!
+        sale = (intent.extras!!.getParcelable(SALE) as? Sale)!!
 
         val transitionName = intent.extras!!.getString(EXTRA_POST_TRANSITION_NAME)
         saleImage.transitionName = transitionName
 
         supportActionBar?.title = sale.name
-        val decodedString = Base64.decode(sale.image, Base64.DEFAULT)
 
-        val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-        saleImage.setImageBitmap(decodedByte)
+        Picasso
+            .get()
+            .load("$BASE_URL$IMAGE_URL${sale.id}")
+            .into(saleImage)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

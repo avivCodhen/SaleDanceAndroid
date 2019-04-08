@@ -1,5 +1,6 @@
 package com.saledance.saledanceapp.network
 
+import com.saledance.saledanceapp.BASE_URL
 import com.saledance.saledanceapp.model.entities.PublishedPost
 import io.reactivex.Observable
 import retrofit2.Retrofit
@@ -22,7 +23,7 @@ interface Api {
                                         RxJava2CallAdapterFactory.create())
                                 .addConverterFactory(
                                         GsonConverterFactory.create())
-                                .baseUrl("https://saledance.azurewebsites.net/")
+                                .baseUrl(BASE_URL)
                                 .build()
 
                         return retrofit.create(Api::class.java)

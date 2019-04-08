@@ -14,14 +14,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.saledance.saledanceapp.EXTRA_POST_TRANSITION_NAME
+import com.saledance.saledanceapp.*
 import com.saledance.saledanceapp.Extensions.toSimpleString
 import com.saledance.saledanceapp.model.entities.PublishedPost
-import com.saledance.saledanceapp.R
-import com.saledance.saledanceapp.SALE
 import com.saledance.saledanceapp.model.entities.Sale
 import com.saledance.saledanceapp.view.interfaces.OnPostClickListener
 import com.saledance.saledanceapp.view.interfaces.OnSaleClickListener
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.post_item.view.*
 
 
@@ -62,10 +61,11 @@ class PostRecyclerViewAdapter(
             itemView.businessBtn.setOnClickListener {clickListener.onPostClick(publishedPost.business, itemView.businessAvatar) }
             itemView.streetTv.text = publishedPost.business.address
             itemView.timeTv.text = toSimpleString(publishedPost.publishTime)
-            val decodedString = Base64.decode(publishedPost.business.image, Base64.DEFAULT)
-            itemView.businessTitleTV.text = publishedPost.business.name
-            val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-            itemView.businessAvatar.setImageBitmap(decodedByte)
+
+            Picasso
+                .get()
+                .load("$BASE_URL$IMAGE_URL${publishedPost.business.id}")
+                .into(itemView.businessAvatar)
         }
 
     }
