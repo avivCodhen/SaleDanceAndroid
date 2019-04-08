@@ -1,16 +1,18 @@
 package com.saledance.saledanceapp.model.entities
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Business (
-    val about: String,
-    val address: String,
-    val businessEmailContact: String,
-    val businessPhoneContact: String,
-    val friday: String,
-    val image: String,
-    val name: String,
-    val saturday: String,
-    val site: String,
-    val weekDays: String
-) : Serializable
+    val about: String?,
+    val address: String?,
+    val businessEmailContact: String?,
+    val businessPhoneContact: String?,
+    val friday: String?,
+    val id: Int?,
+    val name: String?,
+    val saturday: String?,
+    val site: String?,
+    val weekDays: String?
+) : Parcelable

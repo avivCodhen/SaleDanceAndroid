@@ -1,20 +1,18 @@
 package com.saledance.saledanceapp.view
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Base64
 import android.view.MenuItem
 import android.view.View
+import com.saledance.saledanceapp.BASE_URL
 import com.saledance.saledanceapp.model.entities.Business
 import kotlinx.android.synthetic.main.activity_business_details.*
 import com.saledance.saledanceapp.EXTRA_POST_TRANSITION_NAME
-import android.support.v4.view.ViewCompat.setTransitionName
-
-
-
+import com.saledance.saledanceapp.BUSINESS
+import com.saledance.saledanceapp.IMAGE_URL
+import com.squareup.picasso.Picasso
 
 class BusinessActivity : AppCompatActivity() {
 
@@ -25,16 +23,17 @@ class BusinessActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        business = (intent.extras!!.getSerializable("Business") as? Business)!!
+        business = (intent.extras!!.getParcelable(BUSINESS) as? Business)!!
 
         val transitionName = intent.extras!!.getString(EXTRA_POST_TRANSITION_NAME)
         businessImage.transitionName = transitionName
 
         supportActionBar?.title = business.name
-        val decodedString = Base64.decode(business.image, Base64.DEFAULT)
 
-        val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-        businessImage.setImageBitmap(decodedByte)
+        Picasso
+            .get()
+            .load("$BASE_URL$IMAGE_URL${business.id}")
+            .into(businessImage)
 
         businessPhone.text = business.businessPhoneContact
         businessMail.text = business.businessEmailContact
