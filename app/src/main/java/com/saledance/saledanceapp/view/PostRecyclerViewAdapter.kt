@@ -19,6 +19,7 @@ import com.saledance.saledanceapp.view.interfaces.OnPostClickListener
 import com.saledance.saledanceapp.view.interfaces.OnSaleClickListener
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.post_item.view.*
+import com.squareup.picasso.Callback
 
 
 class PostRecyclerViewAdapter(
@@ -62,9 +63,16 @@ class PostRecyclerViewAdapter(
             Picasso
                 .get()
                 .load("$BASE_URL$IMAGE_URL${publishedPost.business.imageId}")
-                .into(itemView.businessAvatar)
-        }
+                .noFade()
+                .into(itemView.businessAvatar, object : Callback {
+                override fun onSuccess() {
+                    itemView.businessAvatar.alpha = 0f
+                    itemView.businessAvatar.animate().setDuration(1000).alpha(1f).start()
+                }
 
+                override fun onError(e: Exception) {}
+            })
+        }
     }
 
     override fun onSaleClick(sale: Sale, imageView: ImageView, context: Context) {

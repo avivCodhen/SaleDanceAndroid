@@ -10,7 +10,9 @@ import com.saledance.saledanceapp.EXTRA_POST_TRANSITION_NAME
 import com.saledance.saledanceapp.IMAGE_URL
 import com.saledance.saledanceapp.model.entities.Sale
 import com.saledance.saledanceapp.view.interfaces.OnSaleClickListener
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.post_item.view.*
 import kotlinx.android.synthetic.main.sale_item.view.*
 
 class SalesRecyclerViewAdapter(private val sales : List<Sale>, private val onSaleClickListener: OnSaleClickListener) : RecyclerView.Adapter<SalesRecyclerViewAdapter.SaleHolder>() {
@@ -42,16 +44,25 @@ class SalesRecyclerViewAdapter(private val sales : List<Sale>, private val onSal
             val uniqueTransitionName = "$EXTRA_POST_TRANSITION_NAME$position"
             ViewCompat.setTransitionName(itemView.saleImage, uniqueTransitionName)
             itemView.saleImage.setOnClickListener{clickListener.onSaleClick(sale, itemView.saleImage, itemView.context)}
-            Picasso
-                .get()
-                .load("$BASE_URL$IMAGE_URL${sale.imageId}")
-                .into(itemView.saleImage)
-
             itemView.salePriceTv.text = String.format(res.getString
                 (com.saledance.saledanceapp.R.string.discount_price),
                 sale.salePrice!!.toInt().toString())
             itemView.beforePriceTv.text = String.format(res.getString
                 (com.saledance.saledanceapp.R.string.original_price),
-                sale.beforePrice!!.toInt().toString())    }
+                sale.beforePrice!!.toInt().toString())
+
+            Picasso
+                .get()
+                .load("$BASE_URL$IMAGE_URL${sale.imageId}")
+                .noFade()
+                .into(itemView.saleImage, object : Callback {
+                    override fun onSuccess() {
+                        itemView.saleImage.alpha = 0f
+                        itemView.saleImage.animate().setDuration(1000).alpha(1f).start()
+                    }
+
+                    override fun onError(e: Exception) {}
+                })
+        }
     }
 }
