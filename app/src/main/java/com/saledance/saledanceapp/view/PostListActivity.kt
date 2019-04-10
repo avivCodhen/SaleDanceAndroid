@@ -25,6 +25,8 @@ import com.saledance.saledanceapp.viewmodel.BusinessListViewModel
 import kotlinx.android.synthetic.main.activity_post_list.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import android.view.animation.AnimationUtils
+
 
 class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     OnPostClickListener {
@@ -146,6 +148,9 @@ class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     private fun createRecyclerView(list : ArrayList<PublishedPost>){
         adapter = PostRecyclerViewAdapter(list, this)
         recyclerView.adapter = adapter
+        val resId = R.anim.layout_animation_fall_down
+        val animation = AnimationUtils.loadLayoutAnimation(this, resId)
+        recyclerView.layoutAnimation = animation
         postActivityLoader.visibility = INVISIBLE
 
     }
