@@ -30,7 +30,7 @@ class BusinessActivity : AppCompatActivity() {
         Picasso
             .get()
             .load("$BASE_URL$IMAGE_URL${business.imageId}")
-            .placeholder(R.drawable.ic_photo_black_24dp)
+            .placeholder(R.drawable.business_image_placeholder)
             .into(businessImage)
 
         businessPhone.text = business.businessPhoneContact

@@ -55,16 +55,8 @@ class SalesRecyclerViewAdapter(private val sales : List<Sale>, private val onSal
             Picasso
                 .get()
                 .load("$BASE_URL$IMAGE_URL${sale.imageId}")
-                .placeholder(R.drawable.ic_photo_black_24dp)
-                .noFade()
-                .into(itemView.saleImage, object : Callback {
-                    override fun onSuccess() {
-                        itemView.saleImage.alpha = 0f
-                        itemView.saleImage.animate().setDuration(1000).alpha(1f).start()
-                    }
-
-                    override fun onError(e: Exception) {}
-                })
+                .placeholder(R.drawable.sale_image_placeholder)
+                .into(itemView.saleImage)
         }
     }
 }
