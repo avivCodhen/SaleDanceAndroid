@@ -8,6 +8,7 @@ import android.support.v4.view.ViewCompat
 import com.saledance.saledanceapp.BASE_URL
 import com.saledance.saledanceapp.EXTRA_POST_TRANSITION_NAME
 import com.saledance.saledanceapp.IMAGE_URL
+import com.saledance.saledanceapp.R
 import com.saledance.saledanceapp.model.entities.Sale
 import com.saledance.saledanceapp.view.interfaces.OnSaleClickListener
 import com.squareup.picasso.Callback
@@ -54,6 +55,7 @@ class SalesRecyclerViewAdapter(private val sales : List<Sale>, private val onSal
             Picasso
                 .get()
                 .load("$BASE_URL$IMAGE_URL${sale.imageId}")
+                .placeholder(R.drawable.ic_photo_black_24dp)
                 .noFade()
                 .into(itemView.saleImage, object : Callback {
                     override fun onSuccess() {

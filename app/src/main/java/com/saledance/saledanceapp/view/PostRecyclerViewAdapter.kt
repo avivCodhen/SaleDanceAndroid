@@ -63,6 +63,7 @@ class PostRecyclerViewAdapter(
             Picasso
                 .get()
                 .load("$BASE_URL$IMAGE_URL${publishedPost.business.imageId}")
+                .placeholder(R.drawable.ic_photo_black_24dp)
                 .noFade()
                 .into(itemView.businessAvatar, object : Callback {
                 override fun onSuccess() {

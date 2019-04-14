@@ -6,12 +6,9 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import com.saledance.saledanceapp.BASE_URL
+import com.saledance.saledanceapp.*
 import com.saledance.saledanceapp.model.entities.Business
 import kotlinx.android.synthetic.main.activity_business_details.*
-import com.saledance.saledanceapp.EXTRA_POST_TRANSITION_NAME
-import com.saledance.saledanceapp.BUSINESS
-import com.saledance.saledanceapp.IMAGE_URL
 import com.squareup.picasso.Picasso
 
 class BusinessActivity : AppCompatActivity() {
@@ -33,6 +30,7 @@ class BusinessActivity : AppCompatActivity() {
         Picasso
             .get()
             .load("$BASE_URL$IMAGE_URL${business.imageId}")
+            .placeholder(R.drawable.ic_photo_black_24dp)
             .into(businessImage)
 
         businessPhone.text = business.businessPhoneContact

@@ -27,6 +27,7 @@ class SaleActivity : AppCompatActivity() {
         Picasso
             .get()
             .load("$BASE_URL$IMAGE_URL${sale.imageId}")
+            .placeholder(R.drawable.ic_photo_black_24dp)
             .into(saleImage)
     }
 

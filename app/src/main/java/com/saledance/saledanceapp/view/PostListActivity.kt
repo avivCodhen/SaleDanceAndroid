@@ -148,7 +148,7 @@ class PostListActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     private fun createRecyclerView(list : ArrayList<PublishedPost>){
         adapter = PostRecyclerViewAdapter(list, this)
         recyclerView.adapter = adapter
-        val resId = R.anim.layout_animation_fall_down
+        val resId = R.anim.layout_animation_from_bottom
         val animation = AnimationUtils.loadLayoutAnimation(this, resId)
         recyclerView.layoutAnimation = animation
         postActivityLoader.visibility = INVISIBLE
